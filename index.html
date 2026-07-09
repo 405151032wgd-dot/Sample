@@ -1,13 +1,127 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>试样样品申请系统</title>
-  <script type="module" crossorigin src="/assets/index-BWtn4w8o.js"></script>
-  <link rel="stylesheet" crossorigin href="/assets/index-984nqiWO.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>试样样品申请系统</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: #f5f7fa; color: #374151; }
+.header { background: #fff; border-bottom: 1px solid #e5e7eb; padding: 0 40px; height: 60px; display: flex; align-items: center; justify-content: space-between; box-shadow: 0 1px 3px rgba(0,0,0,0.04); }
+.logo { display: flex; align-items: center; gap: 10px; font-size: 16px; font-weight: 600; color: #1f2937; }
+.nav { display: flex; align-items: center; gap: 20px; }
+.nav a { text-decoration: none; font-size: 14px; }
+.nav .link { color: #6b7280; }
+.nav .btn { background: #3461ff; color: #fff; padding: 6px 16px; border-radius: 6px; font-weight: 500; font-size: 13px; }
+.container { max-width: 1100px; margin: 0 auto; padding: 28px 24px; }
+.title { text-align: center; margin-bottom: 28px; }
+.title h1 { font-size: 24px; font-weight: 700; margin-bottom: 6px; }
+.title p { font-size: 13px; color: #9ca3af; margin-top: 6px; }
+.badge { display: inline-block; padding: 3px 14px; background: #3461ff; color: #fff; border-radius: 20px; font-size: 13px; font-weight: 500; margin-top: 10px; }
+.card { background: #fff; border-radius: 10px; box-shadow: 0 1px 3px rgba(0,0,0,0.06); margin-bottom: 20px; padding: 24px; }
+.card-title { font-size: 15px; font-weight: 600; margin-bottom: 16px; display: flex; align-items: center; gap: 8px; }
+.grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+.field { margin-bottom: 16px; }
+.field label { display: block; font-size: 13px; font-weight: 500; margin-bottom: 4px; color: #374151; }
+.field label .required { color: #ff4d4f; margin-left: 2px; }
+.field input, .field select, .field textarea { width: 100%; padding: 6px 11px; border: 1px solid #d9d9d9; border-radius: 6px; font-size: 14px; outline: none; transition: border-color .2s; }
+.field input:focus, .field select:focus { border-color: #3461ff; box-shadow: 0 0 0 2px rgba(52,97,255,.1); }
+.field textarea { resize: vertical; min-height: 60px; }
+.product-item { background: #f9fafb; border: 1px solid #e8e8e8; border-radius: 8px; padding: 16px; margin-bottom: 12px; }
+.product-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; }
+.product-tag { display: inline-block; padding: 0 7px; background: #3461ff; color: #fff; border-radius: 4px; font-size: 12px; font-weight: 600; line-height: 22px; }
+.add-btn { width: 100%; padding: 12px; border: 2px dashed #d9d9d9; border-radius: 8px; text-align: center; color: #3461ff; cursor: pointer; font-size: 14px; background: transparent; margin-top: 4px; }
+.footer { text-align: center; padding: 28px 0; }
+.submit-btn { min-width: 240px; height: 48px; background: #3461ff; color: #fff; border: none; border-radius: 8px; font-size: 16px; font-weight: 500; cursor: pointer; box-shadow: 0 2px 8px rgba(0,0,0,.15); }
+.notice { text-align: center; background: #fffbe6; border: 1px solid #ffe58f; border-radius: 8px; padding: 12px 16px; margin-bottom: 20px; font-size: 13px; color: #ad6800; }
+.notice strong { color: #d46b08; }
+@media (max-width: 768px) { .grid { grid-template-columns: 1fr; } }
+</style>
 </head>
 <body>
-  <div id="root"></div>
+<div class="header">
+  <a href="/" style="display:flex;align-items:center;gap:10px;text-decoration:none;color:inherit">
+    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#3461ff" stroke-width="2"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
+    <span class="logo">样品申请系统</span>
+  </a>
+  <div class="nav">
+    <a href="/query" class="link">查询申请</a>
+    <a href="#" class="btn" onclick="alert('后端部署后可访问后台管理')">进入后台 →</a>
+  </div>
+</div>
+
+<div class="container">
+  <div class="notice">
+    <strong>🔔 预览模式</strong> — 此为静态预览页，提交申请、查询进度、后台管理等功能需部署后端 API 服务后使用。
+  </div>
+
+  <div class="title">
+    <h1>样品申请表</h1>
+    <p>可申请多个产品，请完整填写后提交</p>
+    <span class="badge">🚗 汽车零部件</span>
+  </div>
+
+  <div class="card">
+    <div class="card-title"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#3461ff" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></svg> 行业专属信息</div>
+    <div class="grid">
+      <div class="field"><label>材料标准 <span class="required">*</span></label><input placeholder="如：DIN EN 10025"></div>
+      <div class="field"><label>耐久测试要求 <span class="required">*</span></label><input placeholder="如：10万次循环"></div>
+      <div class="field"><label>OE号</label><input placeholder="请输入OE号"></div>
+      <div class="field"><label>零件号</label><input placeholder="如：A12345678"></div>
+      <div class="field"><label>应用车型</label><input placeholder="如：Model Y、VW ID.4"></div>
+      <div class="field"><label>PV测试要求</label><select><option>否</option><option>是</option></select></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#3461ff" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg> 基本信息</div>
+    <div class="field"><label>申请标题 <span class="required">*</span></label><input placeholder="简要描述本次申请内容，如：XX项目样件申请"></div>
+    <div class="grid">
+      <div class="field"><label>紧急程度</label><select><option>普通</option><option>紧急</option><option>特急</option></select></div>
+      <div class="field"><label>期望完成日期 <span class="required">*</span></label><input type="date"></div>
+    </div>
+    <div class="field"><label>用途说明 <span class="required">*</span></label><textarea rows="3" placeholder="研发测试 / 客户演示 / 来料复检 / …"></textarea></div>
+    <div class="field"><label>备注</label><textarea rows="2" placeholder="其他需要说明的内容（选填）"></textarea></div>
+  </div>
+
+  <div class="card">
+    <div class="card-title" style="justify-content:space-between"><span><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#3461ff" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg> 产品清单</span><span style="font-size:12px;background:#fff7e6;padding:0 7px;border-radius:4px;color:#d46b08;line-height:22px">可添加多个产品</span></div>
+    <div class="product-item">
+      <div class="product-header"><span class="product-tag">产品 1</span></div>
+      <div class="grid">
+        <div class="field"><label>样品类型 <span class="required">*</span></label><select><option>请选择</option><option>研发测试样</option><option>客户送样</option><option>来料复检</option></select></div>
+        <div class="field"><label>规格型号</label><input placeholder="如：6061-T6 50x50mm"></div>
+        <div class="field"><label>数量 <span class="required">*</span></label><input type="number" value="1"></div>
+        <div class="field"><label>单位 <span class="required">*</span></label><select><option>件</option><option>套</option><option>米</option></select></div>
+      </div>
+    </div>
+    <div style="margin-top:8px;"><button class="add-btn">+ 添加产品</button></div>
+  </div>
+
+  <div class="card">
+    <div class="card-title"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#3461ff" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg> 申请人信息</div>
+    <div class="grid">
+      <div class="field"><label>公司名称 <span class="required">*</span></label><input placeholder="如：××汽车科技有限公司"></div>
+      <div class="field"><label>姓名 <span class="required">*</span></label><input placeholder="申请人姓名"></div>
+      <div class="field"><label>职务</label><input placeholder="如：研发工程师"></div>
+      <div class="field"><label>联系方式 <span class="required">*</span></label><input placeholder="手机号"></div>
+      <div class="field"><label>邮箱</label><input placeholder="Email（选填）"></div>
+    </div>
+    <div class="field"><label>地址</label><input placeholder="公司地址（选填）"></div>
+  </div>
+
+  <div class="card">
+    <div class="card-title"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#3461ff" stroke-width="2"><path d="M21.44 11.05l-9.19 9.19a6 6 0 0 1-8.49-8.49l9.19-9.19a4 4 0 0 1 5.66 5.66l-9.2 9.19a2 2 0 0 1-2.83-2.83l8.49-8.48"/></svg> 附件上传</div>
+    <div style="border:2px dashed #d9d9d9;border-radius:8px;padding:40px 20px;text-align:center;color:#999">
+      <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#ccc" stroke-width="1.5"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+      <p style="margin-top:12px;font-size:14px">点击或拖拽文件到此区域上传</p>
+      <p style="margin-top:4px;font-size:12px">支持图纸（DWG/PDF）、技术文档、参考照片等，单个文件不超过 50MB</p>
+    </div>
+  </div>
+
+  <div class="footer">
+    <button class="submit-btn" onclick="alert('演示模式：提交功能需部署后端 API 后可用')">提交申请</button>
+  </div>
+</div>
 </body>
 </html>
