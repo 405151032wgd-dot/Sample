@@ -4,7 +4,7 @@
   "private": true,
   "description": "试样样品申请系统",
   "scripts": {
-    "build": "cd client && npm install && npm run build",
+    "build": "cd client && npm install && npm run build && cp _redirects dist/_redirects",
     "start": "cd server && npm install && PORT=3006 node src/index.js",
     "dev": "cd client && npm run dev"
   }
