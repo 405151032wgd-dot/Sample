@@ -1,0 +1,11 @@
+{
+  "name": "sample-request-system",
+  "version": "2.0.0",
+  "private": true,
+  "description": "试样样品申请系统",
+  "scripts": {
+    "build": "cd client && npm install && npm run build",
+    "start": "cd server && npm install && PORT=3006 node src/index.js",
+    "dev": "cd client && npm run dev"
+  }
+}
